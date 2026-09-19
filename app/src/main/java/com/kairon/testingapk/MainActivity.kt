@@ -52,6 +52,6 @@ class MainActivity:AppCompatActivity(){
  private fun launchTest(){val i=registry.all().lastOrNull()?:return;val intent=packageManager.getLaunchIntentForPackage(i.packageName);if(intent==null){status.text="● WARNING  |  QA package not installed";return};intent.putExtra("QA_SESSION_ID",currentSession?.id?:"not-started");startActivity(intent);status.text="● RUNNING  |  "+i.name}
  private fun startSession(){val i=registry.all().lastOrNull();currentSession=TestSession(sessions.newId(),System.currentTimeMillis(),gameInstance=i?.name?:"Local QA");sessions.save(currentSession!!);status.text="● SESSION  |  "+currentSession!!.id}
  private fun stopSession(){currentSession?.let{done->currentSession=done.copy(endMs=System.currentTimeMillis());sessions.save(currentSession!!);status.text="● SAVED  |  "+currentSession!!.id}}
- private fun exportSession(){status.text="● REPORT  |  session JSON export layer ready"}
+ private fun exportSession(){currentSession?.let{com.kairon.testingapk.report.ReportExporter.share(this,it)}?:run{status.text="● WARNING  |  No session to export"}}
  private fun startOverlay(){if(!Settings.canDrawOverlays(this)){startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,Uri.parse("package:"+packageName)));return};val i=Intent(this,OverlayService::class.java);if(android.os.Build.VERSION.SDK_INT>=26)startForegroundService(i)else startService(i);status.text="● OVERLAY  |  active"}
 }
