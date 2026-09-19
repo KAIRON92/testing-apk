@@ -10,7 +10,7 @@ data class PlayerState(
     val item:String?=null,val skeleton:Skeleton?=null,val vehicleId:String?=null,
     val screenX:Float?=null,val screenY:Float?=null
 )
-data class VehicleState(val id:String,val type:String,val position:Vec3,val distanceMeters:Float=0f,val speedMps:Float=0f,val occupantIds:List<String> = emptyList())
+data class VehicleState(val id:String,val type:String,val position:Vec3,val distanceMeters:Float=0f,val speedMps:Float=0f,val occupantIds:List<String> = emptyList(),val screenX:Float?=null,val screenY:Float?=null)
 data class ItemState(val id:String,val name:String,val position:Vec3,val distanceMeters:Float=0f,val floor:String?=null,val screenX:Float?=null,val screenY:Float?=null)
 data class GameState(
     val timestampMs:Long,val localPlayer:PlayerState?,val players:List<PlayerState>,
