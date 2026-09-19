@@ -44,7 +44,7 @@ class OverlayRenderer(context:android.content.Context):View(context){
   t.color=Color.CYAN;t.textAlign=Paint.Align.LEFT;c.drawText(i.name+" • "+i.distanceMeters.toInt()+"m"+(i.floor?.let{" • $it"}?:""),xy.first+10f,xy.second,t)
  }
  private fun drawVehicle(c:Canvas,v:VehicleState){
-  val xy=screen(null,null)?:return;p.color=Color.MAGENTA;c.drawRect(xy.first-12f,xy.second-8f,xy.first+12f,xy.second+8f,p)
+  val xy=screen(v.screenX,v.screenY)?:return;p.color=Color.MAGENTA;c.drawRect(xy.first-12f,xy.second-8f,xy.first+12f,xy.second+8f,p)
   t.color=Color.MAGENTA;t.textAlign=Paint.Align.LEFT;c.drawText(v.type+" • "+v.distanceMeters.toInt()+"m",xy.first+16f,xy.second,t)
   if(config.occupants&&!v.occupantIds.isNullOrEmpty())c.drawText("Occupants: "+v.occupantIds.size,xy.first+16f,xy.second+24f,t)
  }
